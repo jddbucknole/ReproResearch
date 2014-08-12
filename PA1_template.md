@@ -49,7 +49,7 @@ median(daily[,1], na.rm=TRUE)
 
 #Daily Pattern of Steps
 
-To examine the pattern of mean number of steps in a 5 minute interval across the day, we must create a new variable that is the mean of the intervals across days and plot them as a time series.
+To examine the pattern of mean number of steps in a 5 minute interval across the day, we must create a new variable that is the mean of the intervals across days and plot them as a time series.  
 
 
 ```r
@@ -61,12 +61,26 @@ plot(intmeans[,1],intmeans[,2],type='l',main="Time Series of Average Number of S
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
+
+The following code will show the maximum average number of steps and what time of day on which it occurs.
+
+
+
+
 ```r
-max(intmeans)
+max(as.numeric(intmeans[,2]))
 ```
 
 ```
-## [1] "99.4528301886792"
+## [1] 206.2
+```
+
+```r
+as.numeric(intmeans[which.max(as.numeric(intmeans[,2])),1])
+```
+
+```
+## [1] 835
 ```
 
 It is apparent from the data that the time of most activity is in the morning (around 8:30 AM) and there is continuing motion throughout the day with a clear down time during the evening and night (while sleeping).
@@ -115,7 +129,7 @@ daily <- do.call(rbind,l)
 hist(daily[,1],col="red", xlab="Number of Steps per Day with Imputed Values", main="Histogram of Number of Steps per Day")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
 ```r
 mean(daily[,1], na.rm=TRUE)
@@ -183,7 +197,7 @@ library(lattice)
 xyplot(steps~interval | day, data=good_df,layout=c(1,2),type='l')
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
+![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11.png) 
 
 
 

@@ -31,14 +31,23 @@ median(daily[,1], na.rm=TRUE)
 
 #Daily Pattern of Steps
 
-To examine the pattern of mean number of steps in a 5 minute interval across the day, we must create a new variable that is the mean of the intervals across days and plot them as a time series.
+To examine the pattern of mean number of steps in a 5 minute interval across the day, we must create a new variable that is the mean of the intervals across days and plot them as a time series.  
 
 ```{r}
 intm <- lapply(split(act$steps,as.factor(act$interval)),mean,na.rm=TRUE)
 intmeans <- do.call(rbind,intm)
 intmeans <- cbind(rownames(intmeans),intmeans)
 plot(intmeans[,1],intmeans[,2],type='l',main="Time Series of Average Number of Steps \nper 5 minute intervals Throughout the Day",xlab="Time of Day (Military Time)",ylab="Average Number of Steps")
-max(intmeans)
+```
+
+
+The following code will show the maximum average number of steps and what time of day on which it occurs.
+
+
+
+```{r}
+max(as.numeric(intmeans[,2]))
+as.numeric(intmeans[which.max(as.numeric(intmeans[,2])),1])
 ```
 
 It is apparent from the data that the time of most activity is in the morning (around 8:30 AM) and there is continuing motion throughout the day with a clear down time during the evening and night (while sleeping).
